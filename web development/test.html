@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+   <link rel="stylesheet" href="style1.css">
+      
+</head>
+<body>
+  <script type="javascript" src="script.js"></script>
+  <div class="timer">
+    00:00:00
+  </div>
+    <div class="calendar_box">
+            <h1 id="month"></h1>
+            <div class="prev">&#60</div>
+        </div>  
+    <table id="table" cellspacing="20px" border="2px">
+        <tbody id="table">
+        <tr class="days_in_month">
+          <td class="days">SUN</td>
+          <td class="days">MON</td>
+          <td class="days">TUE</td>
+          <td class="days">WED</td>
+          <td class="days">THU</td>
+          <td class="days">FRI</td>
+          <td class="days">SAT</td>
+        </tr>
+       <tr>
+          <td class="num"  onclick="tasking(this.id)" id="1"></td>
+          <td class="num"  onclick="tasking(this.id)" id="2"></td>
+          <td class="num"  onclick="tasking(this.id)" id="3"></td>
+          <td class="num"  onclick="tasking(this.id)" id="4"></td>
+          <td class="num"  onclick="tasking(this.id)" id="5"></td>
+          <td class="num"  onclick="tasking(this.id)" id="6"></td>
+          <td class="num" onclick="tasking(this.id)" id="7"></td>
+        </tr>
+        <tr >
+          <td class="num" onclick="tasking(this.id)" id="8"></td>
+          <td class="num" onclick="tasking(this.id)" id="9"></td>
+          <td class="num" onclick="tasking(this.id)" id="10"></td>
+          <td class="num" onclick="tasking(this.id)" id="11"></td>
+          <td class="num" onclick="tasking(this.id)" id="12"></td>
+          <td class="num" onclick="tasking(this.id)" id="13"></td>
+          <td class="num" onclick="tasking(this.id)" id="14"></td>
+        </tr>
+        <tr >
+          <td class="num" onclick="tasking(this.id)" id="15"></td>
+          <td class="num" onclick="tasking(this.id)" id="16"></td>
+          <td class="num" onclick="tasking(this.id)" id="17"></td>
+          <td class="num" onclick="tasking(this.id)" id="18"></td>
+          <td class="num" onclick="tasking(this.id)" id="19"></td>
+          <td class="num" onclick="tasking(this.id)" id="20"></td>
+          <td class="num" onclick="tasking(this.id)" id="21"></td>
+        </tr>
+        <tr >
+          <td class="num" onclick="tasking(this.id)" id="22"></td>
+          <td class="num" onclick="tasking(this.id)" id="23"></td>
+          <td class="num" onclick="tasking(this.id)" id="24"></td>
+          <td class="num" onclick="tasking(this.id)" id="25"></td>
+          <td class="num" onclick="tasking(this.id)" id="26"></td>
+          <td class="num" onclick="tasking(this.id)" id="27"></td>
+          <td class="num" onclick="tasking(this.id)" id="28"></td>
+        </tr>
+        <tr >
+          <td class="num" onclick="tasking(this.id)" id="29"></td>
+          <td class="num" onclick="tasking(this.id)" id="30"></td>
+          <td class="num" onclick="tasking(this.id)" id="31"></td>
+          <td class="num" onclick="tasking(this.id)" id="32"></td>
+          <td class="num" onclick="tasking(this.id)" id="33"></td>
+          <td class="num" onclick="tasking(this.id)" id="34"></td>
+          <td class="num" onclick="tasking(this.id)" id="35"></td>
+        </tr>
+        <tr >
+            <td class="num" onclick="tasking(this.id)" id="36"></td>
+            <td class="num" onclick="tasking(this.id)" id="37"></td>
+            <td class="num" onclick="tasking(this.id)" id="38"></td>
+            <td class="num" onclick="tasking(this.id)" id="39"></td>
+            <td class="num" onclick="tasking(this.id)" id="40"></td>
+            <td class="num" onclick="tasking(this.id)" id="41"></td>
+            <td class="num" onclick="tasking(this.id)" id="42"></td>
+          </tr>
+      </tbody>
+    
+      </table>
+    
+    <script>
+       var d=new Date();
+       const m=["January","Febraury","March","April","May","June","July","August","September","October","November","December"];
+        var mon=document.getElementById("month");
+        var s=d.getMonth();
+        mon.innerHTML=m[s];
+        var cell = document.getElementsByTagName("td"); 
+        var day=d.getDate();
+        var year=d.getYear();
+        var j=giveday(s,year)+6;
+        alert(j);
+        if(j==6)
+           j=13;
+        var end=totaldays(s+1);
+        var left=totaldays(s);
+        var right=1;
+        for(let c=j-1;c>=7;c--)
+        {
+            cell[c].innerHTML=left;
+            left--;
+        }
+        alert(end);
+        var i =1; 
+        cell[30].innerHTML=day;
+           while(cell[j] != undefined && i<=end){
+            cell[j].innerHTML=i; //do some alert for test
+            i++;
+            j++;
+            }//end while
+            for(let c=j;c<=49;c++)
+            {
+                cell[c].innerHTML=right;
+                //cell[c].style.color=red;
+                right++;
+            }
+        function giveday(m1,y)
+        {
+         const mc=[1,4,4,0,2,5,0,3,6,1,4,6];
+         var t=y%100;
+         var td=Math.floor((t)/4);
+         var sum=1+td+mc[m1]+6+t;
+        
+         if(y %4==0)
+         {if(m==0||m==1)
+        {
+            sum=sum-1;
+        }
+    }
+        var rem=sum%7;
+        
+         return rem;
+        }
+         function totaldays(s)
+         {
+        if(s==1||s==3||s==5||s==7||s==8||s==10||s==12)
+           return 31;
+        if(s==4||s==6||s==9||s==11)
+           return 30;
+        if(s==2)
+        {
+            if(year%4==0)
+              return 29;
+            else
+               return 28;
+        }   
+        
+         }   
+         function tasking(identity)
+         {
+           alert(identity);
+           var getd=document.getElementById(identity).textContent;
+           alert(getd);
+         }
+
+    </script>
+</body>
+</html>
